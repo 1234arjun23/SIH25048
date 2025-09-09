@@ -40,9 +40,10 @@ export function Sidebar({ isOpen, currentView, onViewChange }: SidebarProps) {
     { id: 'dashboard', label: t('dashboard'), icon: Home },
     { id: 'students', label: 'Students', icon: Users },
     { id: 'lessons', label: t('lessons'), icon: BookOpen },
+    { id: 'create-quiz', label: 'Create Quiz', icon: HelpCircle },
     { id: 'upload', label: 'Upload Content', icon: Upload },
     { id: 'analytics', label: 'Analytics', icon: BarChart3 },
-    { id: 'assignments', label: 'Assignments', icon: HelpCircle },
+    { id: 'assignments', label: 'Assignments', icon: BookOpen },
   ];
 
   const adminMenuItems = [
