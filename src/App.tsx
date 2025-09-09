@@ -7,6 +7,9 @@ import { Sidebar } from './components/common/Sidebar';
 import { StudentDashboard } from './components/student/StudentDashboard';
 import { LessonsView } from './components/student/LessonsView';
 import { GamesView } from './components/student/GamesView';
+import { TeacherDashboard } from './components/teacher/TeacherDashboard';
+import { QuizCreator } from './components/teacher/QuizCreator';
+import { GameUploader } from './components/teacher/GameUploader';
 
 function AppContent() {
   const { isAuthenticated, user } = useAuth();
@@ -21,13 +24,19 @@ function AppContent() {
     switch (currentView) {
       case 'dashboard':
         if (user?.role === 'student') return <StudentDashboard />;
+        if (user?.role === 'teacher') return <TeacherDashboard />;
         return <div className="p-8 text-center">Dashboard for {user?.role}</div>;
       case 'lessons':
         return <LessonsView />;
       case 'games':
+        if (user?.role === 'teacher') return <div className="p-8 text-center">Access Denied - Teachers cannot play games</div>;
         return <GamesView />;
       case 'quizzes':
+        if (user?.role === 'teacher') return <QuizCreator />;
         return <div className="p-8 text-center">Quizzes View - Coming Soon</div>;
+      case 'upload-games':
+        if (user?.role === 'teacher') return <GameUploader />;
+        return <div className="p-8 text-center">Access Denied</div>;
       case 'progress':
         return <div className="p-8 text-center">Progress View - Coming Soon</div>;
       case 'leaderboard':
@@ -36,6 +45,15 @@ function AppContent() {
         return <div className="p-8 text-center">Badges View - Coming Soon</div>;
       case 'downloads':
         return <div className="p-8 text-center">Downloads View - Coming Soon</div>;
+      case 'students':
+        if (user?.role === 'teacher') return <div className="p-8 text-center">Students Management - Coming Soon</div>;
+        return <div className="p-8 text-center">Access Denied</div>;
+      case 'analytics':
+        if (user?.role === 'teacher') return <div className="p-8 text-center">Analytics Dashboard - Coming Soon</div>;
+        return <div className="p-8 text-center">Access Denied</div>;
+      case 'reports':
+        if (user?.role === 'teacher') return <div className="p-8 text-center">Reports - Coming Soon</div>;
+        return <div className="p-8 text-center">Access Denied</div>;
       default:
         return <div className="p-8 text-center">View not found</div>;
     }
